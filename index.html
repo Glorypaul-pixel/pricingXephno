@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Xepho - Subscription</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ asset('central/dashboard/styles1.css') }}"
+    />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  </head>
+
+  <style>
+    body {
+      --primary: 25, 91, 255;
+      --color: 44, 62, 80;
+      --bg: 255, 255, 255;
+      --red: 255, 0, 78;
+      height: 100%;
+      background: #f2f6f9;
+      height: calc(var(--vh, 1vh) * 100);
+      overflow: auto;
+      color: rgb(var(--color));
+      width: 100%;
+    }
+    * {
+      list-style: none;
+      outline: none;
+      padding: 0;
+      margin: 0;
+      font-family: "Open Sans", sans-serif;
+      box-sizing: border-box;
+    }
+    b {
+      padding: 0px 4px;
+      display: inline-block;
+    }
+    .con-items {
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4rem;
+    }
+    .item {
+      width: 360px;
+      background: #fff;
+      box-shadow: 0px 5px 30px 0px rgba(0, 0, 0, 0.05);
+      border-radius: 40px;
+      margin: 0px;
+      margin-bottom: 4rem;
+      padding: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .item:not(.color):hover {
+      transform: scale(1.05);
+    }
+    .item:hover .con-img {
+      transform: scale(1.15);
+    }
+    .item.color:hover {
+      transform: scale(1.15);
+    }
+    .con-img {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.25s ease;
+    }
+    .con-img img {
+      width: 130px;
+    }
+    /* .item1 {
+      padding-right: 45px;
+      margin-top: 8rem;
+    } */
+    .item2 {
+      z-index: 100;
+    }
+    /* .item3 {
+      padding-left: 45px;
+    } */
+    .item.color {
+      background: #1c797e;
+      color: #fff;
+      transform: scale(1.1);
+    }
+    .item.color li {
+      color: rgba(255, 255, 255, 0.75);
+    }
+    .item.color li b {
+      color: rgba(255, 255, 255, 1);
+    }
+    .item.color li i {
+      color: rgba(255, 255, 255, 1);
+    }
+    .item aside {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      position: relative;
+      width: 100%;
+    }
+    .item aside h3 {
+      font-size: 2rem;
+    }
+    .item aside p {
+      font-size: 1.2rem;
+    }
+    .badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: #fff;
+      padding: 5px 10px;
+      border-radius: 12px;
+      color: #1c797e;
+      font-weight: bold;
+      font-size: 0.85rem;
+    }
+    .item ul {
+      padding: 20px 0px;
+      flex: 1;
+      width: 100%;
+    }
+    .item ul li {
+      width: 100%;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      text-align: left;
+      color: rgb(var(--color), 0.5);
+    }
+    .item ul li b {
+      color: rgb(var(--color), 1);
+    }
+    .item ul li i {
+      font-size: 1.6rem;
+      margin-right: 15px;
+      color: rgb(var(--color), 1);
+    }
+    .item1 button,
+    .item3 button {
+      padding: 2px;
+      width: 100%;
+      background: #1c797e;
+      border: 3px solid transparent;
+      border-radius: 20px;
+      color: #fff;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0px 10px 25px 0px rgba(61, 203, 171, 0.35);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .item2 button {
+      padding: 2px;
+      width: 100%;
+      background: white;
+      border: 3px solid transparent;
+      border-radius: 20px;
+      color: #1c797e;
+      font-weight: bold;
+      font-size: 1.1rem;
+      box-shadow: 0px 10px 25px 0px rgba(61, 203, 171, 0.35);
+      cursor: pointer;
+      transition: all 0.25s ease;
+    }
+    .item button:not(.border):hover {
+      transform: translate(0, 5px);
+      box-shadow: 0px 0px 0px 0px rgba(61, 203, 171, 0.35);
+    }
+    .item button.border {
+      border: 3px solid #fff;
+    }
+    .item button.border:hover {
+      background: #fff;
+      color: #3c7f83;
+    }
+    button .btnTon {
+      padding: 1rem 2rem;
+    }
+    @font-face {
+      font-family: "Visby Regular";
+      src: url("./central/fonts/visby-cdnfonts/VisbyBold.otf") format("woff2"),
+        url("./central/fonts/Visby-Round-Font/Visby-Round-www.Dfonts.org/Webfont/VisbyRoundCF-Bold.woff")
+          format("woff");
+      font-weight: normal;
+      font-style: normal;
+    }
+
+    body {
+      font-family: "Visby Regular", Arial, sans-serif; /* Fallback fonts included */
+      font-style: normal;
+      font-weight: normal;
+    }
+    .mainBoard {
+      background-color: #f4f6f9;
+      margin-bottom: 2rem;
+    }
+
+    .mainBoard .menubar {
+      background-color: #1c797e;
+      padding: 1rem;
+    }
+
+    /* Header and navigation styling */
+    .mainBoard header {
+      background-color: #1c797e;
+      display: flex;
+      justify-content: space-between;
+      z-index: 10;
+      position: relative;
+      padding-bottom: 2rem;
+    }
+
+    .mainBoard nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 50%;
+      padding: 2rem 1rem 1rem;
+    }
+    .iconsRed {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 40%;
+    }
+    /* Button and dropdown styles */
+    .headButton {
+      background-color: white;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+    }
+    .headButton {
+      animation: slideInFromRight 1s ease-out;
+      animation-delay: 0.3s;
+    }
+    .HeadSubBtn {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .countryDropdown {
+      background-color: transparent;
+      border: none;
+      padding: 5px 10px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .countryDropdown option {
+      padding: 5px;
+      display: flex;
+      align-items: center;
+    }
+
+    .flagImg i {
+      font-size: 20px;
+      margin-right: 10px;
+    }
+
+    .profile-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .profile-picture {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid #ddd;
+    }
+    .stripe-button-el span {
+      display: block;
+      position: relative;
+      padding: 0 12px;
+      height: 30px;
+      line-height: 30px;
+      background: #1c797e;
+      background-image: #1c797e;
+    }
+    .profile-name {
+      font-size: 18px;
+      color: #ffffff;
+      /* height: none; */
+    }
+    .stripe-button-el span {
+      background: none;
+      height: 1px;
+    }
+    .infoIcon,
+    .notificon {
+      background-color: white;
+      border-radius: 50%;
+      padding: 10px;
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      margin: 0 10px;
+    }
+
+    .infoIcon i,
+    .notificon i {
+      font-size: 20px;
+      color: #1c797e;
+    }
+    .notification-count {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      font-size: 12px;
+      padding: 5px;
+      width: 20px;
+      height: 20px;
+      text-align: center;
+    }
+    .profile-picture-input {
+      display: none;
+    }
+    @keyframes slideInFromTop {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    @keyframes slideInFromBottom {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    @keyframes slideInFromLeft {
+      0% {
+        transform: translateY(-100%);
+      }
+      100% {
+        transform: translateY(0);
+      }
+    }
+    .HeadSubBtn {
+      animation: slideInFromTop 1.5s ease-out;
+      animation-delay: 0.7s;
+    }
+    .infoIcon,
+    .notificon {
+      animation: slideInFromBottom 1s ease-out;
+      animation-delay: 0.3s;
+    }
+    .profile-container {
+      animation: slideInFromLeft 1s ease-out;
+      animation-delay: 0.3s;
+    }
+    @media (max-width: 768px) {
+      .con-items {
+        flex-direction: column;
+        padding: 1rem;
+      }
+      .item {
+        width: 90%;
+        margin-bottom: 1rem;
+      }
+    }
+    @media (max-width: 480px) {
+      .headButton {
+        width: 100%;
+      }
+      .iconsRed {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+
+  <body>
+    <div class="mainBoard">
+      <header>
+      <div></div>
+
+        <nav>
+          <button class="headButton">
+            <div class="HeadSubBtn">
+              <div class="flagImg">
+                <i class="fas fa-flag-usa"></i>
+              </div>
+              <select class="countryDropdown">
+                <option value="en" class="flagOption">English</option>
+                <option value="es" class="flagOption">Español</option>
+                <option value="fr" class="flagOption">Français</option>
+                <option value="de" class="flagOption">Deutsch</option>
+                <option value="it" class="flagOption">Italiano</option>
+              </select>
+            </div>
+          </button>
+          <div class="iconsRed">
+            <div class="infoIcon">
+              <i class="fa-solid fa-info"></i>
+              <span class="notification-count">3</span>
+            </div>
+            <div class="notificon">
+              <i class="fa-regular fa-bell"></i>
+              <span class="notification-count">5</span>
+            </div>
+            <div class="profile-container">
+              <input
+                type="file"
+                id="profilePictureInput"
+                class="profile-picture-input"
+                onchange="updateProfilePicture(event)"
+              />
+              <div class="profile-picture" id="profilePicture"></div>
+              <span class="profile-name" id="profileName">John Doe</span>
+            </div>
+          </div>
+        </nav>
+      </header>
+    </div>
+
+    <div class="bgimg">
+      <div class="content">
+        <div class="con-items">
+          <div class="item item1">
+            <div class="con-img">
+              <img src="1-3.png" alt="" />
+            </div>
+            <aside>
+              <h3>Premium</h3>
+              <h6>
+                Individual course creators who wis to own a landing page and to
+                establish their brand and showcase their courses.
+              </h6>
+              <p>
+                <b> £9 / Month </b>
+              </p>
+            </aside>
+            <ul>
+              <li>
+                <i class="bx bx-check"></i>
+                Personal <b>subsite</b>
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                Limited <b>Platform Branding</b>
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                <b> Monthly </b>
+                Subscription
+              </li>
+            </ul>
+            <button>
+              <form action="{{ route('dashboard.subscribe') }}" method="POST">
+                <script
+                  src="https://checkout.stripe.com/checkout.js"
+                  class="stripe-button"
+                  data-key="{{ env('STRIPE_KEY') }}"
+                  data-name="Xepho LMS"
+                  data-description="Subscription Plan"
+                  data-amount="900"
+                  data-email="{{ auth()->user()->email }}"
+                  data-currency="gbp"
+                  data-label="Choose Plan"
+                ></script>
+              </form>
+            </button>
+          </div>
+          <div class="item color item2">
+            <div class="con-img">
+              <img src="2-1.png" alt="" />
+            </div>
+            <span class="badge"> Popular </span>
+            <aside>
+              <h3>Academy</h3>
+              <h6>
+                Individual course creators who wis to own a landing page and to
+                establish their brand and showcase their courses.
+              </h6>
+              <p>
+                <b> £29 / Month </b>
+              </p>
+            </aside>
+            <ul>
+              <li>
+                <i class="bx bx-check"></i>
+                All features in <b>Premium</b>
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                <b>Custom domain</b> support
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                Team <b>Account</b>
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                <b>Advanced </b> branding
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                <b>Multi-instructor</b> support
+              </li>
+            </ul>
+            <button class="border">
+              <form action="{{ url('dashboard.subscribe') }}" method="POST">
+                <script
+                  src="https://checkout.stripe.com/checkout.js"
+                  class="stripe-button"
+                  data-key="{{ env('STRIPE_KEY') }}"
+                  data-name="Xepho LMS"
+                  data-description="Subscription Plan"
+                  data-amount="2900"
+                  data-email="{{ auth()->user()->email }}"
+                  data-currency="gbp"
+                  data-label="Choose Plan"
+                ></script>
+              </form>
+            </button>
+          </div>
+          <div class="item item3">
+            <div class="con-img">
+              <img src="3-1.png" alt="" />
+            </div>
+            <aside>
+              <h3>Enterprise</h3>
+              <h6>
+                A flexible plan for large organizations and enterprises with
+                specific needs. Customize your features and pricing to suit your
+                requirements. Ideal for schools, academies, and training
+                centers.
+              </h6>
+              <p>
+                <b> Custom </b>
+              </p>
+            </aside>
+            <ul>
+              <li>
+                <i class="bx bx-check"></i>
+                All features in <b>Academy</b>
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                Account <b>Manager</b>
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                <b>Whitelabel</b>
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                Comprehensive analytics
+              </li>
+              <li>
+                <i class="bx bx-check"></i>
+                Online 24/7 support
+              </li>
+            </ul>
+            <button class="btnTon">Contact Support</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
