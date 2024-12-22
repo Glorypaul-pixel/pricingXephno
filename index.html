@@ -386,6 +386,29 @@
       animation-delay: 0.3s;
     }
     @media (max-width: 768px) {
+      .mainBoard header {
+        flex-direction: column;
+        width: 100%;
+        justify-content: space-between;
+        position: relative;
+        padding-bottom: 2rem;
+      }
+      .mainBoard nav {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        gap: 1rem;
+      }
+      .iconsRed {
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+      }
+      .headButton {
+        width: 100%;
+        justify-content: center;
+      }
       .con-items {
         flex-direction: column;
         padding: 1rem;
@@ -396,6 +419,25 @@
       }
     }
     @media (max-width: 480px) {
+      .profile-name {
+        font-size: 16px;
+      }
+
+      .profile-picture {
+        width: 25px;
+        height: 25px;
+      }
+
+      .infoIcon i,
+      .notificon i {
+        font-size: 16px;
+      }
+
+      .notification-count {
+        font-size: 10px;
+        width: 16px;
+        height: 16px;
+      }
       .headButton {
         width: 100%;
       }
@@ -410,8 +452,7 @@
   <body>
     <div class="mainBoard">
       <header>
-      <div></div>
-
+        <div></div>
         <nav>
           <button class="headButton">
             <div class="HeadSubBtn">
