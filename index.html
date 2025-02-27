@@ -3,210 +3,119 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Xepho - Subscription</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
-      rel="stylesheet"
-    />
+    <title>Xepho Subscription Plans</title>
     <link rel="stylesheet" href="style.css" />
-    <link
-      rel="stylesheet"
-      href="https://xepho.co.uk/central/dashboard/styles1.css"
-    />
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   </head>
-
   <body>
-    <div class="mainBoard">
-      <header>
-        <div></div>
-        <nav>
-          <button class="headButton">
-            <div class="HeadSubBtn">
-              <div class="flagImg">
-                <i class="fas fa-flag-usa"></i>
-              </div>
-              <select class="countryDropdown">
-                <option value="en" class="flagOption">English</option>
-                <option value="es" class="flagOption">Español</option>
-                <option value="fr" class="flagOption">Français</option>
-                <option value="de" class="flagOption">Deutsch</option>
-                <option value="it" class="flagOption">Italiano</option>
-              </select>
-            </div>
-          </button>
-          <div class="iconsRed">
-            <div class="infoIcon">
-              <i class="fa-solid fa-info"></i>
-              <span class="notification-count">3</span>
-            </div>
-            <div class="notificon">
-              <i class="fa-regular fa-bell"></i>
-              <span class="notification-count">5</span>
-            </div>
-            <div class="profile-container">
-              <input
-                type="file"
-                id="profilePictureInput"
-                class="profile-picture-input"
-                onchange="updateProfilePicture(event)"
-              />
-              <div class="profile-picture" id="profilePicture"></div>
-              <span class="profile-name" id="profileName">John Doe</span>
-            </div>
-          </div>
-        </nav>
-      </header>
-    </div>
-
-    <div class="backgroungimg">
-      <div class="Pricecontent">
-        <div class="con-items">
-          <div class="item item1">
-            <div class="con-img">
-              <img src="1-3.png" alt="" />
-            </div>
-            <aside>
-              <h3>Premium</h3>
-              <h6>
-                Individual course creators who wis to own a landing page and to
-                establish their brand and showcase their courses.
-              </h6>
-              <p>
-                <b> £9 / Month </b>
-              </p>
-            </aside>
+    <section class="pricing-container">
+      <h2>See Xepho Subscription Plans</h2>
+      <p class="top-sentence">
+        Unlock Efficiency, Clarity, and Productivity with Xepho – the ultimate
+        all-in-one learning management solution for both creators, educators,
+        and organizations.
+      </p>
+      <div class="toggle-switch">
+        <span>Monthly</span>
+        <label class="switch">
+          <input type="checkbox" id="togglePricing" />
+          <span class="slider round"></span>
+        </label>
+        <span>Annual</span>
+      </div>
+      <div class="plans-container">
+        <ul class="feature-list">
+          <li>Instructors</li>
+          <li>Student Enrollment</li>
+          <li>Live Classes</li>
+          <li>Forums & Community</li>
+          <li>Consultation Booking</li>
+          <li>Custom Domain</li>
+          <li>White Labeling</li>
+          <li>Support Level</li>
+          <li>Scalability</li>
+          <li>Commission on Sales</li>
+        </ul>
+        <div class="plans">
+          <div class="plan free">
+            <h3>Freemlum($0)</h3>
+            <p class="price" id="freePrice">$0.00</p>
+            <span>Forever</span>
+            <a href=""><button class="firstBtn">Join for free</button></a>
             <ul>
-              <li>
-                <i class="bx bx-check"></i>
-                Personal <b>subsite</b>
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                Limited <b>Platform Branding</b>
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                <b> Monthly </b>
-                Subscription
-              </li>
+              <li>Course creation</li>
+              <li>Service fee applies</li>
+              <li>Marketplace</li>
+              <li>Basic Support</li>
+              <li class="ul"></li>
+              <li class="ul"></li>
+              <li class="ul"></li>
+              <li class="ul"></li>
+              <li class="ul"></li>
+              <li class="ul"></li>
             </ul>
-            <button>
-              <form action="{{ route('dashboard.subscribe') }}" method="POST">
-                <script
-                  src="https://checkout.stripe.com/checkout.js"
-                  class="stripe-button"
-                  data-key="{{ env('STRIPE_KEY') }}"
-                  data-name="Xepho LMS"
-                  data-description="Subscription Plan"
-                  data-amount="900"
-                  data-email="{{ auth()->user()->email }}"
-                  data-currency="gbp"
-                  data-label="Choose Plan"
-                ></script>
-              </form>
-            </button>
           </div>
-          <div class="item color item2">
-            <div class="con-img">
-              <img src="2-1.png" alt="" />
-            </div>
-            <span class="badge"> Popular </span>
-            <aside>
-              <h3>Academy</h3>
-              <h6>
-                Individual course creators who wis to own a landing page and to
-                establish their brand and showcase their courses.
-              </h6>
-              <p>
-                <b> £29 / Month </b>
-              </p>
-            </aside>
+          <div class="plan creator">
+            <h3>Creator</h3>
+            <p class="price" id="creatorPrice">$35</p>
+            <span id="creatorSub">Per user/month</span>
+            <a href=""><button class="SecondBtn">Start Premium</button></a>
             <ul>
-              <li>
-                <i class="bx bx-check"></i>
-                All features in <b>Premium</b>
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                <b>Custom domain</b> support
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                Team <b>Account</b>
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                <b>Advanced </b> branding
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                <b>Multi-instructor</b> support
-              </li>
+              <li>1 Instructor</li>
+              <li>Student Enrollment</li>
+              <li>Live Classes</li>
+              <li>Live Classes</li>
+              <li>Forums & Community</li>
+              <li>Consultation Booking</li>
+              <li>White labelling</li>
+              <li>Suitable for Individuals</li>
+              <li>Advance Technical Support</li>
+              <li class="ul"></li>
             </ul>
-            <button class="border">
-              <form action="{{ url('dashboard.subscribe') }}" method="POST">
-                <script
-                  src="https://checkout.stripe.com/checkout.js"
-                  class="stripe-button"
-                  data-key="{{ env('STRIPE_KEY') }}"
-                  data-name="Xepho LMS"
-                  data-description="Subscription Plan"
-                  data-amount="2900"
-                  data-email="{{ auth()->user()->email }}"
-                  data-currency="gbp"
-                  data-label="Choose Plan"
-                ></script>
-              </form>
-            </button>
           </div>
-          <div class="item item3">
-            <div class="con-img">
-              <img src="3-1.png" alt="" />
-            </div>
-            <aside>
-              <h3>Enterprise</h3>
-              <h6>
-                A flexible plan for large organizations and enterprises with
-                specific needs. Customize your features and pricing to suit your
-                requirements. Ideal for schools, academies, and training
-                centers.
-              </h6>
-              <p>
-                <b> Custom </b>
-              </p>
-            </aside>
+          <div class="plan academy">
+            <h3>Business</h3>
+            <p class="price" id="academyPrice">$100</p>
+            <span id="academySub">Per business/month</span>
+            <a href=""><button class="ThirdBtn">Start Business</button></a>
             <ul>
-              <li>
-                <i class="bx bx-check"></i>
-                All features in <b>Academy</b>
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                Account <b>Manager</b>
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                <b>Whitelabel</b>
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                Comprehensive analytics
-              </li>
-              <li>
-                <i class="bx bx-check"></i>
-                Online 24/7 support
-              </li>
+              <li>Everything in Premium</li>
+              <li>Up to 5 Instructors</li>
+              <li>Custom Domain</li>
+              <li>Priority Support + Account Manager</li>
+              <li>Scalable for organizations</li>
+              <li class="ul"></li>
+              <li class="ul"></li>
+              <li class="ul"></li>
+              <li class="ul"></li>
+              <li class="ul"></li>
             </ul>
-            <button class="btnTon">Contact Support</button>
+          </div>
+          <div class="plan custom">
+            <h3>Enterprise</h3>
+            <p class="price" id="customPrice">(Custom)</p>
+            <span>Built for scale</span>
+            <a href=""> <button class="SecondBtn">Contact Sales</button></a>
+            <ul>
+              <li>Unlimited & Customizable</li>
+              <li>Tailored Student Management</li>
+              <li>Custom Solution</li>
+              <li>Tailored Consultation System</li>
+              <li>Fully Customizable</li>
+              <li>Fully Branded Solution</li>
+              <li>Dedicated Support Team</li>
+              <li>Fully Scalable & Customized</li>
+              <li class="ul"></li>
+              <li class="ul"></li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
+      <h4 class="subtext">
+        Creators have the option to purchase a custom domain, allowing for a
+        more personalized and professional online presence. For more details and
+        assistance with setup, please <a href="#">Contact Support</a>.
+      </h4>
+    </section>
+    <script src="script.js"></script>
   </body>
 </html>
